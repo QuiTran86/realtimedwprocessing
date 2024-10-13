@@ -6,7 +6,7 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
-start_date = datetime(2024, 10, 6)
+start_date = datetime(2024, 10, 11)
 default_args = {
     'owner': 'quitran',
     'depends_on_past': False,
@@ -15,7 +15,7 @@ default_args = {
 
 # Parameters = 50  # Number of rows to generate
 rows_limit = 50
-output_file = './branch_dim_data.csv'
+output_file = './data/branch_dim_data.csv'
 
 # List of sample UK cities and regions for realistic data generation
 cities = ["London", "Manchester", "Birmingham", "Glasgow", "Edinburgh"]

@@ -6,7 +6,7 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
-start_date = datetime(2024, 10, 6)
+start_date = datetime(2024, 10, 11)
 default_args = {
     'owner': 'quitran',
     'depends_on_past': False,
@@ -15,7 +15,7 @@ default_args = {
 
 # Parameters
 rows_limit = 100  # Number of rows to generate
-output_file = './customer_dim_data.csv'
+output_file = './data/customer_dim_data.csv'
 
 
 # Function to generate random data

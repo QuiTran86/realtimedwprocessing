@@ -5,14 +5,14 @@ from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 import pandas as pd
 
-start_date = datetime(year=2024, month=10, day=6)
+start_date = datetime(year=2024, month=10, day=11)
 default_args = {
     'owner': 'quitran',
     'depends_on_past': False,
     'backfill': False
 }
 rows_limit = 50
-output_file = './account_dim_data.csv'
+output_file = './data/account_dim_data.csv'
 
 account_ids = []
 account_types = []
@@ -29,7 +29,7 @@ def generate_random_data(row_num):
     customer_id = f'C{random.randint(1, 1000):05d}'
     balance = round(random.uniform(100.00, 10000.00), 2)
     random_date = datetime.now() - timedelta(days=random.randint(0, 365))
-    opening_dates = random_date.timestamp() * 1000
+    opening_dates = int(random_date.timestamp() * 1000)
     return account_id, account_type, customer_id, opening_dates, status, balance
 
 
@@ -49,10 +49,11 @@ def generate_account_dim_data():
         {
             'account_id': account_ids,
             'account_type': account_types,
-            'status': statuses,
             'customer_id': customer_ids,
+            'opening_date': opening_dates,
+            'status': statuses,
             'balance': balances,
-            'opening_date': opening_dates
+
         }
     )
     data.to_csv(output_file, index=False)
